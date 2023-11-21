@@ -104,7 +104,7 @@ export class MoviesComponent {
     studiosDescription = studiosDescription.slice(0, -2);
 
     const alert = await this.alertController.create({
-      header: 'Estudios:',
+      header: 'Estudios',
       message: studiosDescription,
       buttons: ['Fechar'],
     });
