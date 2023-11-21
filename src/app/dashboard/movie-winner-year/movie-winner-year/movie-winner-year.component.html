@@ -1,0 +1,38 @@
+<ion-card-header>
+  <ion-card-subtitle>LISTA DE VENCEDORES DE FILMES POR ANO</ion-card-subtitle>
+</ion-card-header>
+<ion-searchbar (search)="getAllMovies()" [(ngModel)]="inputYear" placeholder="Pesquise por um ano"
+  show-clear-button="always"></ion-searchbar>
+
+<ion-card-content *ngIf="movieWinnerYear">
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">Id</ion-label>
+      <ion-label color="primary">Year</ion-label>
+      <ion-label color="primary">Title</ion-label>
+      <ion-label color="primary">Producers</ion-label>
+      <ion-label color="primary">Studios</ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let item of movieWinnerYear">
+      <ion-label>{{item.id}}</ion-label>
+      <ion-label>{{item.year}}</ion-label>
+      <ion-label>{{item.title}}</ion-label>
+
+      <ion-label>
+        <ion-button (click)="presentAlertProducers(item.producers)">VER</ion-button>     
+      </ion-label>
+      
+      <ion-label>
+        <ion-button (click)="presentAlertStudios(item.studios)">VER</ion-button>    
+      </ion-label>
+      
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngIf="!movieWinnerYear">
+    <ion-label>Carregando...</ion-label>
+    <ion-spinner name="circular"></ion-spinner>
+  </ion-item>
+</ion-card-content>
+

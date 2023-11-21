@@ -1,0 +1,24 @@
+<ion-card-header>
+  <ion-card-subtitle
+    >ANOS EM QUE TIVERAM MAIS DE UM VENCEDORES</ion-card-subtitle
+  >
+</ion-card-header>
+<ion-card-content *ngIf="multipleWinners">
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">ANO</ion-label>
+      <ion-label color="primary">VITÓRIAS</ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let win of multipleWinners.years" >
+      <ion-label>{{ win.year }}</ion-label>
+      <ion-label>{{ win.winnerCount }}</ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-card-content>
+
+<ion-item *ngIf="!multipleWinners">
+  <ion-label>Carregando...</ion-label>
+  <ion-spinner name="circular"></ion-spinner>
+</ion-item>

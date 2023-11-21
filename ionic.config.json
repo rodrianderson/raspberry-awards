@@ -1,0 +1,7 @@
+{
+  "name": "raspberry-awards",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,52 @@
+<ion-card-content *ngIf="maxMinWin">
+  <ion-card-header>
+    <ion-card-subtitle>INTERVALO DE PRODUTORES COM MAIOR E MENOR VITÓRIA  </ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-header>
+    <ion-card-subtitle>MAIOR</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">PRODUTOR</ion-label>
+      <ion-label color="primary">INTERVALO</ion-label>
+      <ion-label color="primary">ANO ANTERIOR</ion-label>
+      <ion-label color="primary">ANO SEGUINTE</ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let max of maxMinWin.max">
+      <ion-label>{{max.producer}}</ion-label>
+      <ion-label>{{max.interval}}</ion-label>
+      <ion-label>{{max.previousWin}}</ion-label>
+      <ion-label>{{max.followingWin}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-card-content>
+
+<ion-card-content *ngIf="maxMinWin">
+  <ion-card-header>
+    <ion-card-subtitle>MENOR</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">PRODUTOR</ion-label>
+      <ion-label color="primary">INTERVALO</ion-label>
+      <ion-label color="primary">ANO ANTERIOR</ion-label>
+      <ion-label color="primary">ANO SEGUINTE</ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let min of maxMinWin.min">
+      <ion-label>{{min.producer}}</ion-label>
+      <ion-label>{{min.interval}}</ion-label>
+      <ion-label>{{min.previousWin}}</ion-label>
+      <ion-label>{{min.followingWin}}</ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-card-content>
+<ion-item *ngIf="!maxMinWin">
+  <ion-label>Carregando...</ion-label>
+  <ion-spinner name="circular"></ion-spinner>
+</ion-item>

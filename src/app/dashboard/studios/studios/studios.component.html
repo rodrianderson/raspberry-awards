@@ -1,0 +1,22 @@
+<ion-card-header>
+  <ion-card-subtitle>OS 3 MELHORES ESTÚDIOS COM MAIOR VITÓRIO</ion-card-subtitle>
+</ion-card-header>
+<ion-card-content *ngIf="studios">
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">NOME</ion-label>
+      <ion-label color="primary">VITÓRIAS</ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let win of studios.studios | slice:0:3;"  >
+      <ion-label>{{ win.name }}</ion-label>
+      <ion-label>{{ win.winCount }}</ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-card-content>
+
+<ion-item *ngIf="!studios">
+  <ion-label>Carregando...</ion-label>
+  <ion-spinner name="circular"></ion-spinner>
+</ion-item>
