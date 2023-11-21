@@ -1,11 +1,9 @@
 import { Projection } from "./enum/projection.enum";
 
-export interface ParametersFilter {
-    
+export interface ParametersFilter {    
     projection?: Projection;
     winner?: boolean;
     page?: number;
     size?: number;
-    year?: number;
-    
+    year?: number;    
 }

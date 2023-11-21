@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Projection } from 'src/app/model/enum/projection.enum';
 import { Studio } from 'src/app/model/studios.model';
 import { RaspberryService } from 'src/app/services/raspberry.service';
 
@@ -14,11 +15,9 @@ export class StudiosComponent  implements OnInit {
   constructor(private raspberryService: RaspberryService<Studio>) { }
 
   ngOnInit() {
-    const STUDIOS = 'studios-with-win-count';
-    this.raspberryService.getMovies(STUDIOS, {}).subscribe(result => {      
+    this.raspberryService.getMovies(Projection.STUDIOS, {}).subscribe(result => {      
       this.studios = result;
     })
-
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Projection } from 'src/app/model/enum/projection.enum';
 import { MultipleWinners } from 'src/app/model/multiple-winners.model';
 import { RaspberryService } from 'src/app/services/raspberry.service';
 
@@ -13,8 +14,7 @@ export class MultipleWinnersComponent  implements OnInit {
   constructor(private raspberryService: RaspberryService<MultipleWinners>) { }
 
   ngOnInit() {
-    const MULTIPLE_WINNERS = 'years-with-multiple-winners';
-    this.raspberryService.getMovies(MULTIPLE_WINNERS, {}).subscribe(result => {
+    this.raspberryService.getMovies(Projection.MULTIPLE_WINNERS, {}).subscribe(result => {
       this.multipleWinners = result;
     })
   }

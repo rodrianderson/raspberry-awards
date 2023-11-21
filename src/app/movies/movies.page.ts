@@ -16,9 +16,9 @@ export class MoviesComponent {
   public paginationMovies: PaginationMovies | undefined;
   public moviesFilter: Movies[] | undefined;
   public items: number[] = [];
-  private parametersFilter: ParametersFilter = {};
   public pagenation = 0;
   public optionsWiner: string[] = ['Yes', 'No'];
+  private parametersFilter: ParametersFilter = {};
 
   constructor(
     private raspberryService: RaspberryService<PaginationMovies>,
@@ -26,8 +26,10 @@ export class MoviesComponent {
   ) {}
 
   ngOnInit() {
-    this.parametersFilter.page = 0;
-    this.parametersFilter.size = 15;
+    const startPage = 0;
+    const startSize = 15;
+    this.parametersFilter.page = startPage;
+    this.parametersFilter.size = startSize;
     this.getAllMovies();
   }
 
@@ -43,10 +45,12 @@ export class MoviesComponent {
 
   getAllMovies() {
     if (this.inputYear) {
+      const startPage = 0;
+      const maxPage = 99;
       this.paginationMovies = undefined;
-      this.parametersFilter.page = 0;
+      this.parametersFilter.page = startPage;
       this.parametersFilter.year = this.inputYear;
-      this.parametersFilter.size = 99;
+      this.parametersFilter.size = maxPage;
     }
     this.raspberryService
       .getMovies('', this.parametersFilter)
@@ -127,12 +131,14 @@ export class MoviesComponent {
   }
 
   clearFilter() {
+    const startPage = 0;
+    const startSize = 15;
     this.inputYear = undefined;
     this.inputWinner = 'default';
     this.paginationMovies = undefined;
-    this.parametersFilter.page = 0;
+    this.parametersFilter.page = startPage;
     this.pagenation = 0;
-    this.parametersFilter.size = 15;
+    this.parametersFilter.size = startSize;
     this.parametersFilter.year = undefined;
     this.getAllMovies();
   }

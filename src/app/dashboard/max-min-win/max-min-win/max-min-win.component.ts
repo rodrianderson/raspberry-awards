@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Projection } from 'src/app/model/enum/projection.enum';
 import { MaxMinWin } from 'src/app/model/max-min-win.model';
 import { RaspberryService } from 'src/app/services/raspberry.service';
 
@@ -14,9 +15,7 @@ export class MaxMinWinComponent  implements OnInit {
   constructor(private raspberryService: RaspberryService<MaxMinWin>) { }
 
   ngOnInit() {
-    const MAX_MIN_WIN = 'max-min-win-interval-for-producers';
-
-    this.raspberryService.getMovies(MAX_MIN_WIN, {}).subscribe(result => {
+    this.raspberryService.getMovies(Projection.MAX_MIN_WIN, {}).subscribe(result => {
       this.maxMinWin = result;
     })
   }

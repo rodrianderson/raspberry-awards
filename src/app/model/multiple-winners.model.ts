@@ -3,6 +3,6 @@ export interface MultipleWinners {
 }
 
 export interface YearsWinners {
-    year: string;
-    winnerCount: number;
+  year: string;
+  winnerCount: number;
 }

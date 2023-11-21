@@ -1,11 +1,11 @@
 export interface MaxMinWin {
-    max: MaxMinWinData[];
-    min: MaxMinWinData[];
+  max: MaxMinWinData[];
+  min: MaxMinWinData[];
 }
 
 export interface MaxMinWinData {
-    producer: string,
-    interval: number,
-    previousWin: number,
-    followingWin: number,
+  producer: string;
+  interval: number;
+  previousWin: number;
+  followingWin: number;
 }
