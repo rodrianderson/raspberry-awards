@@ -1,7 +1,7 @@
 <h1 align="center">Raspberry Awards</h1>
 
 ## :computer: Projeto
-Projeto tem objetivo de comprir o desafio da Texoit.
+Projeto tem objetivo de comprir o desafio da TEXO IT.
 
 ## :wrench: Recursos Utilizados
 - Angular 17
