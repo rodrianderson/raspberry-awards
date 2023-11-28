@@ -16,7 +16,7 @@ Clonar repositório ```git clone https://github.com/rodrianderson/raspberry-awar
 
 - Abra a pasta ```raspberry-awards``` no prompt de comando do Windows.
 - Execute ```npm install``` para instalar os módulos necessários do NodeJs.
-- Execute ```ionic serve``` para iniciar o servidor backend ```localhost:3003\```.
+- Execute ```ionic serve``` para iniciar o servidor frontend ```localhost:3003\```.
 
 ## Author
 :computer: [Anderson Rodrigues](https://github.com/rodrianderson)
