@@ -24,11 +24,14 @@
                 <ion-card-subtitle>Filtrar por ano</ion-card-subtitle>
               </ion-item>
 
-              <ion-item>
+              <ion-item class="ion-item-searchbar-filter">
                 <ion-searchbar class="searchbar-filter" [(ngModel)]="inputYear" placeholder="Year"
                   show-clear-button="always">
                 </ion-searchbar>
-                <ion-button (click)="getAllMovies()">Filtrar</ion-button>
+                <ion-button (click)="filterYear()" [disabled]="inputYear.length < 4">Filtrar</ion-button>
+              </ion-item>
+              <ion-item>
+                <span class="error-message" *ngIf="inputYear.length < 4">Por favor insira 4 caracteres para a busca...</span>
               </ion-item>
             </ion-col>
             <ion-col size="3">
@@ -75,6 +78,10 @@
               <ion-button (click)="presentAlertStudios(item.studios)">VER</ion-button>
             </ion-label>
 
+          </ion-item>
+
+          <ion-item *ngIf="!paginationMovies.content.length">
+            <ion-label>Não foi encontrado dados correspondente ao filtro</ion-label>
           </ion-item>
         </ion-list>
 

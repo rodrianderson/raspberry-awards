@@ -13,23 +13,27 @@ export class MovieWinnerYearComponent  implements OnInit {
 
   private parametersFilter: ParametersFilter = {};
   public movieWinnerYear: MovieWinnerYear[] = [];
-  public inputYear: number | undefined;
+  public inputYear = "1990";
 
   constructor(private raspberryService: RaspberryService<MovieWinnerYear[]>, 
               private alertController: AlertController) { }
 
   ngOnInit() {
-    this.inputYear = 1990;
+    this.parametersFilter.year = Number(this.inputYear);
     this.getAllMovies();
-    this.inputYear = undefined;
+    this.inputYear = "";
   }
 
-  getAllMovies() {
+  getAllMovies() {    
     this.parametersFilter.winner = true;
-    this.parametersFilter.year = this.inputYear;  
-    this.raspberryService.getMovies('' , this.parametersFilter).subscribe(result => {
-      this.movieWinnerYear = result;
-    });
+    
+    if(this.inputYear.length >= 4) {
+      this.parametersFilter.year = Number(this.inputYear);
+       
+      this.raspberryService.getMovies('' , this.parametersFilter).subscribe(result => {
+        this.movieWinnerYear = result;
+      });   
+    }
   }
 
   async presentAlertStudios(studios: string[]) {

@@ -11,7 +11,7 @@ import { Movies } from '../model/movies.model';
   styleUrls: ['movies.page.scss'],
 })
 export class MoviesComponent {
-  public inputYear: number | undefined;
+  public inputYear = '';
   public inputWinner: string = 'default';
   public paginationMovies: PaginationMovies | undefined;
   public moviesFilter: Movies[] | undefined;
@@ -19,6 +19,10 @@ export class MoviesComponent {
   public pagenation = 0;
   public optionsWiner: string[] = ['Yes', 'No'];
   private parametersFilter: ParametersFilter = {};
+  private maxPage = 8;
+  private startPage = 0;
+  private totalPages = 0;
+  private currentPage = 0;
 
   constructor(
     private raspberryService: RaspberryService<PaginationMovies>,
@@ -26,74 +30,77 @@ export class MoviesComponent {
   ) {}
 
   ngOnInit() {
-    const startPage = 0;
-    const startSize = 15;
-    this.parametersFilter.page = startPage;
-    this.parametersFilter.size = startSize;
-    this.getAllMovies();
+    this.parametersFilter.page = this.startPage;
+    this.parametersFilter.size = this.maxPage;
+    this.parametersFilter.year = undefined;
+    this.getServiceMovies();
   }
 
   onIonInfinite(ev: InfiniteScrollCustomEvent) {
     this.pagenation = this.pagenation + 1;
     this.parametersFilter.page = this.pagenation;
-    this.getAllMovies();
-
+    if(this.currentPage < this.totalPages) {
+      this.getServiceMovies();
+    }
+  
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();
     }, 100);
   }
 
-  getAllMovies() {
-    if (this.inputYear) {
-      const startPage = 0;
-      const maxPage = 99;
+  filterYear() {
+    this.isWinner(); 
+    if (this.inputYear.length >= 4) {
       this.paginationMovies = undefined;
-      this.parametersFilter.page = startPage;
-      this.parametersFilter.year = this.inputYear;
-      this.parametersFilter.size = maxPage;
+      this.parametersFilter.page = this.startPage;
+      this.parametersFilter.year = Number(this.inputYear);
+      this.parametersFilter.size = this.maxPage;                 
+      this.getServiceMovies();      
+    }    
+  }
+
+  public isWinner() {
+    switch (this.inputWinner) {
+      case "true": {
+        this.parametersFilter.winner = true;
+        break;
+      }
+      case "false": {
+        this.parametersFilter.winner = false;
+        break;
+      }
+      default: {
+        this.parametersFilter.winner = undefined;
+        break;
+      }
     }
+  }
+
+  public filterWinner() {
+    this.parametersFilter.page = this.startPage;
+    this.parametersFilter.size = this.maxPage;
+    this.isWinner();       
+    this.paginationMovies = undefined;
+    this.pagenation = 0;
+    this.currentPage = 0
+    this.getServiceMovies();     
+  }
+
+  private getServiceMovies() {
     this.raspberryService
       .getMovies('', this.parametersFilter)
       .subscribe((result) => {
+        this.totalPages = result.totalPages;
+        this.currentPage = result.number;
         if (this.paginationMovies) {
           this.paginationMovies.content = this.paginationMovies.content.concat(
             result.content
           );
         } else {
           this.paginationMovies = result;
-        }
+        }        
+
       });
-  }
-
-  filterYear() {
-    if (this.paginationMovies) {
-      this.paginationMovies.content = this.paginationMovies.content.filter(
-        (filter) => {
-          return filter.year == this.inputYear;
-        }
-      );
-    }
-  }
-
-  filterWinner() {
-    if (!this.moviesFilter && this.paginationMovies) {
-      this.moviesFilter = this.paginationMovies.content;
-    } else if (this.paginationMovies && this.moviesFilter) {
-      this.paginationMovies.content = this.moviesFilter;
-    }
-
-    if (this.paginationMovies && this.moviesFilter) {
-      this.paginationMovies.content = this.paginationMovies.content.filter(
-        (filter) => {
-          return (
-            filter.winner.toString() === this.inputWinner ||
-            this.inputWinner === 'default'
-          );
-        }
-      );
-
-      console.log(this.paginationMovies.content);
-    }
   }
 
   async presentAlertStudios(studios: string[]) {
@@ -131,15 +138,19 @@ export class MoviesComponent {
   }
 
   clearFilter() {
-    const startPage = 0;
-    const startSize = 15;
-    this.inputYear = undefined;
-    this.inputWinner = 'default';
+    this.clearParameters();
+    this.getServiceMovies();
+  }
+
+  public clearParameters() {
+    this.inputYear = '';
+    this.inputWinner = 'default'
     this.paginationMovies = undefined;
-    this.parametersFilter.page = startPage;
+    this.parametersFilter.page = this.startPage;
     this.pagenation = 0;
-    this.parametersFilter.size = startSize;
+    this.currentPage = 0
+    this.parametersFilter.size = this.maxPage;
+    this.parametersFilter.winner = undefined;
     this.parametersFilter.year = undefined;
-    this.getAllMovies();
   }
 }

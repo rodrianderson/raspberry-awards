@@ -40,7 +40,7 @@ export class RaspberryService<T> {
       if(parameters.size) {
         queryParams = queryParams.append('size', parameters.size)
       }
-      if(parameters.winner) {
+      if(parameters.winner != undefined) {
         queryParams = queryParams.append('winner', parameters.winner)
       }
       if(parameters.year) {

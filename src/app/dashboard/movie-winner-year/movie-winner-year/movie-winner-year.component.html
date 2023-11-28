@@ -3,6 +3,7 @@
 </ion-card-header>
 <ion-searchbar (search)="getAllMovies()" [(ngModel)]="inputYear" placeholder="Pesquise por um ano"
   show-clear-button="always"></ion-searchbar>
+  <span  class="error-message" *ngIf="inputYear.length < 4">Por favor insira 4 caracteres para a busca...</span>
 
 <ion-card-content *ngIf="movieWinnerYear">
   <ion-list>
@@ -28,11 +29,16 @@
       </ion-label>
       
     </ion-item>
+
+    <ion-item *ngIf="!movieWinnerYear.length">
+      <ion-label>Não foi encontrado vencedores para esse ano...</ion-label>
+      <ion-spinner name="circular"></ion-spinner>
+    </ion-item>
+
   </ion-list>
 
   <ion-item *ngIf="!movieWinnerYear">
     <ion-label>Carregando...</ion-label>
-    <ion-spinner name="circular"></ion-spinner>
   </ion-item>
 </ion-card-content>
 
