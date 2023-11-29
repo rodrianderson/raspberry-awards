@@ -26,12 +26,12 @@
 
               <ion-item class="ion-item-searchbar-filter">
                 <ion-searchbar class="searchbar-filter" [(ngModel)]="inputYear" placeholder="Year"
-                  show-clear-button="always">
+                  show-clear-button="always" placeholder="Filtre por um ano com 4 caracteres">
                 </ion-searchbar>
                 <ion-button (click)="filterYear()" [disabled]="inputYear.length < 4">Filtrar</ion-button>
               </ion-item>
               <ion-item>
-                <span class="error-message" *ngIf="inputYear.length < 4">Por favor insira 4 caracteres para a busca...</span>
+                <span class="error-message" *ngIf="inputYear.length < 4">Campo obrigatorio...</span>
               </ion-item>
             </ion-col>
             <ion-col size="3">

@@ -19,7 +19,7 @@ export class MoviesComponent {
   public pagenation = 0;
   public optionsWiner: string[] = ['Yes', 'No'];
   private parametersFilter: ParametersFilter = {};
-  private maxPage = 8;
+  private maxPage = 10;
   private startPage = 0;
   private totalPages = 0;
   private currentPage = 0;

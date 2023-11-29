@@ -1,9 +1,10 @@
 <ion-card-header>
   <ion-card-subtitle>LISTA DE VENCEDORES DE FILMES POR ANO</ion-card-subtitle>
 </ion-card-header>
-<ion-searchbar (search)="getAllMovies()" [(ngModel)]="inputYear" placeholder="Pesquise por um ano"
-  show-clear-button="always"></ion-searchbar>
-  <span  class="error-message" *ngIf="inputYear.length < 4">Por favor insira 4 caracteres para a busca...</span>
+<ion-searchbar (search)="getAllMovies()" [(ngModel)]="inputYear" placeholder="Filtre por um ano com 4 caracteres"
+  show-clear-button="always" (ionClear)="resetFilter()"></ion-searchbar>
+
+<span class="error-message" *ngIf="inputYear.length < 4">Campo obrigatorio...</span>
 
 <ion-card-content *ngIf="movieWinnerYear">
   <ion-list>
@@ -21,13 +22,13 @@
       <ion-label>{{item.title}}</ion-label>
 
       <ion-label>
-        <ion-button (click)="presentAlertProducers(item.producers)">VER</ion-button>     
+        <ion-button (click)="presentAlertProducers(item.producers)">VER</ion-button>
       </ion-label>
-      
+
       <ion-label>
-        <ion-button (click)="presentAlertStudios(item.studios)">VER</ion-button>    
+        <ion-button (click)="presentAlertStudios(item.studios)">VER</ion-button>
       </ion-label>
-      
+
     </ion-item>
 
     <ion-item *ngIf="!movieWinnerYear.length">
@@ -41,4 +42,3 @@
     <ion-label>Carregando...</ion-label>
   </ion-item>
 </ion-card-content>
-

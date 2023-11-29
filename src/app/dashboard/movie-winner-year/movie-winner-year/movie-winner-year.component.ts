@@ -66,4 +66,10 @@ export class MovieWinnerYearComponent  implements OnInit {
     await alert.present();
   }
 
+  public resetFilter(){
+    this.inputYear = '1990';
+    this.getAllMovies();
+    this.inputYear = "";
+  }
+
 }
